@@ -1,0 +1,5 @@
+Using json web token for authentication.
+
+How does json web token work?
+
+The client sends a payload object containing a email and password, the password is sent to the server in plain text. The server receives the request and uses the email address to find the user in mongodb. If a user is found, a user object will be returned from the database. The user object has a password attribute that is encrypted. Bcrypt is then used to decrypt the password using the plaintext password sent from the client. If the plaintext matches the encryption version, then the user object is saved as the payload when creating the jwt token, and the plain text password is used as the secret key. A new jwt is returned to the client, and the client must use the jwt token when talking with the api.

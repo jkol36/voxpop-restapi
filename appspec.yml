@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_container.sh
+      timeout: 120
+      runas: ec2-user
+  AfterInstall:
+    - location: scripts/build_image.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStart:
+    - location: scripts/run_image.sh
+      timeout: 60
+      runas: ec2-user
